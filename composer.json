@@ -1,0 +1,8 @@
+{
+    "name": "nicolas-choquet/norsys_presence_paper",
+    "require": {
+        "steampixel/simple-php-router": "^0.6.0",
+        "spipu/html2pdf": "^5.2.2",
+        "phpmailer/phpmailer": "^6.2"
+    }
+}

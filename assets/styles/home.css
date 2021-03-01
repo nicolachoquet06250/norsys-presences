@@ -1,0 +1,88 @@
+.norsys-modal {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, .8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  transition: .3s;
+}
+
+.norsys-modal .modal-content {
+  max-width: 90%;
+  padding: 15px;
+  max-height: 90vh;
+}
+
+.norsys-modal:target {
+  visibility: visible;
+}
+
+.modal-body {
+  overflow: auto;
+}
+
+.norsys-dropdown > input[type="checkbox"] {
+  display: none;
+}
+
+.norsys-dropdown > input[type="checkbox"] + label {
+  display: inline-block;
+  padding: 15px;
+  border-radius: 5px 5px 5px 5px;
+  background: lightgray;
+  cursor: pointer;
+}
+
+.norsys-dropdown > input[type="checkbox"] + label + .norsys-dropdown-content {
+  position: absolute;
+  margin-top: 5px;
+  height: 0;
+  min-width: 118px;
+  width: auto;
+  overflow: hidden;
+  visibility: hidden;
+  transition: .5s;
+}
+
+.norsys-dropdown > input[type="checkbox"]:checked + label i {
+  transform: rotate(180deg);
+}
+
+.norsys-dropdown > input[type="checkbox"]:checked + label + .norsys-dropdown-content {
+  visibility: visible;
+  height: auto;
+  border-radius: 5px 5px 5px 5px;
+  background: lightgray;
+}
+
+.norsys-dropdown > input[type="checkbox"] + label + .norsys-dropdown-content > ul > li {
+  display: inline-block;
+  padding: 10px;
+  border-bottom: 1px solid gray;
+  cursor: pointer;
+  width: 100%;
+}
+
+.norsys-dropdown > input[type="checkbox"] + label + .norsys-dropdown-content > ul > li a {
+  color: black;
+  text-decoration: none;
+}
+
+.norsys-dropdown > input[type="checkbox"] + label + .norsys-dropdown-content > ul > li:hover {
+  background: gray;
+}
+
+.norsys-dropdown > input[type="checkbox"] + label + .norsys-dropdown-content > ul > li:hover a {
+  color: white;
+}
+
+.norsys-dropdown > input[type="checkbox"] + label + .norsys-dropdown-content > ul > li:last-child {
+  border-bottom: none;
+  margin-bottom: none;
+}
