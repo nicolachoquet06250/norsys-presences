@@ -16,3 +16,15 @@ Route::add('/login', function() {
 Route::add('/calendar', function() {
   echo file_get_contents(__DIR__.'/../views/calendar.html');
 }, 'get');
+
+Route::add('/recap', function() {
+  echo file_get_contents(__DIR__.'/../views/view-recap.html');
+}, 'get');
+
+Route::add('/recap/edit', function() {
+  echo file_get_contents(__DIR__.'/../views/edit-recap.html');
+}, 'get');
+
+Route::add('/recap/list', function() {
+  echo file_get_contents(__DIR__.'/../views/list-recap.html');
+}, 'get');

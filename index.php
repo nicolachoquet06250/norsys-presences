@@ -9,29 +9,12 @@ use Steampixel\Route;
 /* Functions */
 include __DIR__.'/functions.php';
 
-/* Front */
-include __DIR__.'/routes/front.php';
-
-/* Login */
-include __DIR__.'/routes/login.php';
-
-/* Users */
-include __DIR__.'/routes/users.php';
-
-/* Presences */
-include __DIR__.'/routes/presences.php';
-
-/* Agencies */
-include __DIR__.'/routes/agencies.php';
-
-/* Search */
-include __DIR__.'/routes/search.php';
-
-/* Export */
-include __DIR__.'/routes/export.php';
-
-/* Calendar */
-include __DIR__.'/routes/calendar.php';
+$dir = opendir(__DIR__.'/routes');
+while (($elem = readdir($dir)) !== false) {
+    if ($elem !== '.' && $elem !== '..' && is_file(__DIR__.'/routes/'.$elem)) {
+        include __DIR__.'/routes/'.$elem;
+    }
+}
 
 /* Main */
 
