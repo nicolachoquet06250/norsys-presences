@@ -58,7 +58,7 @@ function create_calendar(json) {
     if (day.day >= 6) {
       if (day.day === 5) {
         let col = document.createElement('div');
-        col.classList.add(`col-2`);
+        col.classList.add(`col-0', 'col-md-2`);
         row.appendChild(col);
       }
     } else {
@@ -169,7 +169,7 @@ function create_calendar(json) {
     if (last_day >= 6) {
       if (last_day === 5) {
         let col = document.createElement('div');
-        col.classList.add(`col-2`);
+        col.classList.add(`col-0', 'col-md-2`);
         row.appendChild(col);
       }
     } else {
