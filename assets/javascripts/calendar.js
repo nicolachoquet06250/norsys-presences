@@ -158,32 +158,40 @@ function create_calendar(json) {
   }
   
   function create_externe_month_day(json, last_day, date_day, additional_class, row) {
-    let col = document.createElement('div');
-    col.classList.add(`col-2`, 'calendar-day', additional_class);
     if (last_day >= 6) {
-      col.classList.remove('col-2');
-      col.classList.add('weekend', 'col-1');
+      if (last_day === 5) {
+        let col = document.createElement('div');
+        col.classList.add(`col-2`);
+        row.appendChild(col);
+      }
+    } else {
+      let col = document.createElement('div');
+      col.classList.add(`col-2`, 'calendar-day', additional_class);
+      /*if (last_day >= 6) {
+        col.classList.remove('col-2');
+        col.classList.add('weekend', 'col-1');
+      }*/
+      
+      const date = new Date();
+      date.setYear(parseInt(json.month) === 12 ? parseInt(json.year) + 1 : json.year);
+      date.setMonth(parseInt(json.month) === 12 ? 1 : json.month + 1);
+      date.setDate(date_day);
+    
+      const badges_container = document.createElement('div');
+      badges_container.classList.add('badges-container');
+    
+      const day_badge = document.createElement('span');
+      day_badge.classList.add('badge', 'rounded-pill', 'bg-info', 'text-dark');
+      day_badge.innerHTML = date.getDate();
+      badges_container.appendChild(day_badge);
+      
+      col.appendChild(badges_container);
+      
+      const content = document.createElement('div');
+      col.appendChild(content);
+      
+      row.appendChild(col);
     }
-    
-    const date = new Date();
-    date.setYear(parseInt(json.month) === 12 ? parseInt(json.year) + 1 : json.year);
-    date.setMonth(parseInt(json.month) === 12 ? 1 : json.month + 1);
-    date.setDate(date_day);
-  
-    const badges_container = document.createElement('div');
-    badges_container.classList.add('badges-container');
-  
-    const day_badge = document.createElement('span');
-    day_badge.classList.add('badge', 'rounded-pill', 'bg-info', 'text-dark');
-    day_badge.innerHTML = date.getDate();
-    badges_container.appendChild(day_badge);
-    
-    col.appendChild(badges_container);
-    
-    const content = document.createElement('div');
-    col.appendChild(content);
-    
-    row.appendChild(col);
   }
   
   const months = ['', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
