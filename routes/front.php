@@ -26,5 +26,5 @@ Route::add('/recap/edit', function() {
 }, 'get');
 
 Route::add('/recap/list', function() {
-  echo file_get_contents(__DIR__.'/../views/list-recap.html');
+  echo file_get_contents(__DIR__.'/../views/list-recaps.html');
 }, 'get');
