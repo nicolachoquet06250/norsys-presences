@@ -2,7 +2,7 @@
 
 use Steampixel\Route;
 
-Route::add('/api/recup/upload', function() {
+Route::add('/api/recap/upload', function() {
     var_dump($_POST['image']);
 }, 'post');
 
