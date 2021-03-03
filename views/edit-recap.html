@@ -64,9 +64,9 @@
                         serverPath: '/api/recap/upload',
                         fileFieldName: 'image',
                         headers: {
-                            'Authorization': 'Client-ID xxxxxxxxxxxx'
+                            'Authorization': JSON.parse(localStorage.getItem('user')).token
                         },
-                        urlPropertyName: 'data.link'
+                        urlPropertyName: 'file'
                     }
                 }
             });
