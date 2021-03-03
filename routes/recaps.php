@@ -2,6 +2,10 @@
 
 use Steampixel\Route;
 
+Route::add('/api/recup/upload', function() {
+    var_dump($_POST['image']);
+}, 'post');
+
 Route::add('/api/recaps', function() {}, 'get');
 
 Route::add('/api/recap/([0-9]+)', function($id) {}, 'get');
