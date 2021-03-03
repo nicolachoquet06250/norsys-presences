@@ -3,7 +3,7 @@
 use Steampixel\Route;
 
 Route::add('/api/recap/upload', function() {
-    var_dump($_FILES['images']);
+    var_dump($_FILES['image']);
 }, 'post');
 
 Route::add('/api/recaps', function() {}, 'get');
