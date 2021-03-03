@@ -53,3 +53,7 @@
   justify-content: start;
   align-items: end;
 }
+
+.calendar-day.reserved {
+  background: lightgreen;
+}

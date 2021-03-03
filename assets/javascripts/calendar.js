@@ -107,6 +107,10 @@ function create_calendar(json) {
         }
         return reducer;
       }, false);
+
+      if (iHaveReserved) {
+        col.classList.add('reserved');
+      }
       
       if (day.reservations.length === 5 && !iHaveReserved) {
         reservation_btn.setAttribute('disabled', 'disabled');
