@@ -37,6 +37,12 @@
         window.addEventListener('load', () => {
             $('#editor').trumbowyg();
         });
+
+        document.querySelector('.trumbowyg-insertImage-button').addEventListener('mousedown', e => {
+            e.preventDefault();
+            console.log(e);
+            e.target.dispatchEvent(new Event('mousedown', e));
+        })
     </script>
 </body>
 </html>
