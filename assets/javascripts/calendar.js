@@ -275,7 +275,7 @@ function create_calendar(json) {
       if (week.length < 7) {
         let n = 1;
         
-        for (let _ in range(start_second_loop, 8)) {
+        for (let _ in range(start_second_loop, 7)) {
           create_externe_month_day(json, last_day, n, 'next-month-day', row);
           n++; last_day++;
         }
