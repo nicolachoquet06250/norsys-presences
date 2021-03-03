@@ -175,10 +175,10 @@ function create_calendar(json) {
     } else {
       let col = document.createElement('div');
       col.classList.add(`col-2`, 'calendar-day', additional_class);
-      /*if (last_day >= 6) {
+      if (last_day >= 6) {
         col.classList.remove('col-2');
         col.classList.add('weekend', 'col-1');
-      }*/
+      }
       
       const date = new Date();
       date.setYear(parseInt(json.month) === 12 ? parseInt(json.year) + 1 : json.year);
