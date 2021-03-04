@@ -55,4 +55,11 @@ window.addEventListener('load', () => {
                 }
             });
         });
+
+    document.querySelector('#send_recap').addEventListener('click', e => {
+        e.preventDefault()
+        e.stopPropagation();
+
+        console.log(document.querySelector('#editor').innerHTML);
+    })
 });
