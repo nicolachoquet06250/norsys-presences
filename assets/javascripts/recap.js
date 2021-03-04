@@ -58,7 +58,7 @@ window.addEventListener('load', () => {
                                                             .replace(/(.)[\ ]+\</g, '$1<')
                                                             .replace(/(.+)\<([a-zA-Z])/g, '$1 <$2')
                                                             .replace(/([a-zA-Z])\>(.+)\<\/([a-zA-Z])/g, '$1> $2 </$3')
-                                                            .replace(/\/([a-zA-Z])\>(.+)/g, '/$1> $1') }
+                                                            .replace(/\/([a-zA-Z])\>(.+)/g, '/$1> $2') }
                     ]
                 }
             });
