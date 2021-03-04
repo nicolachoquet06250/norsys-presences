@@ -76,5 +76,6 @@ window.addEventListener('load', () => {
         e.preventDefault();
         e.stopPropagation();
 
+        console.log('coucou');
     })
 });
