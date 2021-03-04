@@ -16,11 +16,9 @@ window.addEventListener('load', () => {
     document.querySelector('#profile span').innerHTML = user.lastname + ' ' + user.firstname.substr(0, 1) + '.';
     document.querySelector('#profile span + strong').innerHTML = user.agency;
 
-    fetch('/views/recap_templates/template.html')
+    fetch('/views/recap_templates/hebdo.html')
         .then(r => r.text())
         .then(html => {
-            console.log(html);
-            
             $('#editor').trumbowyg({
                 btnsDef: {
                     // Create a new dropdown
@@ -29,14 +27,13 @@ window.addEventListener('load', () => {
                         ico: 'insertImage'
                     }
                 },
-                // Redefine the button pane
                 btns: [
                     ['viewHTML'],
                     ['formatting'],
                     ['strong', 'em', 'del'],
                     ['superscript', 'subscript'],
                     ['link'],
-                    ['image'], // Our fresh created dropdown
+                    ['image'],
                     ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
                     ['unorderedList', 'orderedList'],
                     ['horizontalRule'],
@@ -46,7 +43,6 @@ window.addEventListener('load', () => {
                     ['template']
                 ],
                 plugins: {
-                    // Add imagur parameters to upload plugin for demo purposes
                     upload: {
                         serverPath: '/api/recap/upload',
                         fileFieldName: 'image',
@@ -56,7 +52,7 @@ window.addEventListener('load', () => {
                         urlPropertyName: 'file'
                     },
                     templates: [
-                        { name: 'Récap hebdo', html }
+                        { name: 'Récap hebdo', html: html.replace(/\ /g, '') }
                     ]
                 }
             });
