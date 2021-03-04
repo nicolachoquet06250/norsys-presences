@@ -63,7 +63,8 @@ window.addEventListener('load', () => {
         fetch('/api/recap', {
                 method: 'post',
                 body: JSON.stringify({
-                    html: document.querySelector('#editor').innerHTML
+                    html: document.querySelector('#editor').innerHTML,
+                    token: JSON.parse(localStorage.getItem('user')).token
                 })
             }).then(r => r.text())
             .then(json => {
