@@ -44,16 +44,12 @@
             
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                <a href="/" class="nav-link active" aria-current="page">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/calendar" class="nav-link">Calendrier / Réservations</a>
-                </li>
-                <li class="nav-item dropdown norsys-dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Historique</a>
-                    <ul class="dropdown-menu norsys-dropdown-content" aria-labelledby="navbarScrollingDropdown"></ul>
-                </li>
+                    <li class="nav-item">
+                        <a href="/" class="nav-link active" aria-current="page">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/calendar" class="nav-link">Calendrier / Réservations</a>
+                    </li>
                 </ul>
                 
                 <div class="d-flex">
@@ -76,6 +72,52 @@
             </div>
         </div>
     </div>
+
+    <div id="modal-profile" class="norsys-modal">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title">
+            Profile
+            </h1>
+            
+            <a href="#" class="btn-close"></a>
+        </div>
+        
+        <div class="modal-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Modifier mon mot de passe</h2>
+                    </div>
+                </div>
+            
+                <form class="row">
+                    <div class="col-12 mb-2">
+                        <div class="input-group">
+                            <input type="password" id="password-1" placeholder="Mot de passe" class="form-control" />
+                                
+                            <button class="input-group-text fas fa-eye toggle-password"></button>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 mb-2">
+                        <div class="input-group">
+                            <input type="password" id="password-2" placeholder="Confirmer le mot de passe" class="form-control" />
+                                
+                            <button class="input-group-text fas fa-eye toggle-password"></button>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 mb-2">
+                        <button type="submit" class="btn btn-info">Modifier</button>
+                    </div>
+                    
+                    <div class="col-12 modal-alerts"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
     <!-- Import jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
