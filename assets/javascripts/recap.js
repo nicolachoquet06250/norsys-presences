@@ -39,7 +39,8 @@ window.addEventListener('load', () => {
             ['horizontalRule'],
             ['removeformat'],
             ['fullscreen'],
-            ['emoji']
+            ['emoji'],
+            ['template']
         ],
         plugins: {
             // Add imagur parameters to upload plugin for demo purposes
@@ -50,7 +51,17 @@ window.addEventListener('load', () => {
                     'Authorization': JSON.parse(localStorage.getItem('user')).token
                 },
                 urlPropertyName: 'file'
+            },
+            templates: [
+            {
+                name: 'Template 1',
+                html: '<p>I am a template!</p>'
+            },
+            {
+                name: 'Template 2',
+                html: '<p>I am a different template!</p>'
             }
+        ]
         }
     });
 });
