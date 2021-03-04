@@ -54,3 +54,10 @@ function isBisextilYear($year = null) {
   if (is_null($year)) $year = date('Y');
   return nbDaysInMonth('02', $year) === 29;
 }
+
+function get_week_extremity_days($week_number, $year){
+  return [
+      'first_day' => date("d/m/Y", strtotime('First Monday January ' . $year . ' +' . ($week_number - 1) . ' Week')),
+      'last_day' => date("d/m/Y", strtotime('First Monday January ' . $year . ' +' . $week_number . ' Week -3 day'))
+  ];
+}

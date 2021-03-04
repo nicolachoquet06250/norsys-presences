@@ -24,11 +24,19 @@ Route::add('/api/recaps', function() {}, 'get');
 Route::add('/api/recap/([0-9]+)', function($id) {}, 'get');
 
 Route::add('/api/recap', function() {
+	$monthes = ['', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'septembre', 'Octobre', 'Novembre', 'Décembre'];
+
 	$body = getBody();
 	$token = $body['token'];
 	$user = json_decode(base64_decode($token), true);
 
-	echo $body['html'] . $user['firstname'] . ' ' . $user['lastname'];
+	$week = get_week_extremity_days(date('W'), date('Y'));
+
+	$start = date('d', strtotime($week['first_day']));
+	$end = date('d', strtotime($week['last_day']));
+	$month = $monthes[intval(date('n', strtotime($week['first_day'])))];
+
+	echo str_replace(['%start%', '%end%', '%month%'], [$start, $end, $month], $body['html']);
 }, 'post');
 
 Route::add('/api/recap/([0-9]+)', function() {}, 'put');
