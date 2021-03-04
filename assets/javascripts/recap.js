@@ -16,52 +16,47 @@ window.addEventListener('load', () => {
     document.querySelector('#profile span').innerHTML = user.lastname + ' ' + user.firstname.substr(0, 1) + '.';
     document.querySelector('#profile span + strong').innerHTML = user.agency;
 
-
-
-    $('#editor').trumbowyg({
-        btnsDef: {
-            // Create a new dropdown
-            image: {
-                dropdown: ['insertImage', 'upload'],
-                ico: 'insertImage'
-            }
-        },
-        // Redefine the button pane
-        btns: [
-            ['viewHTML'],
-            ['formatting'],
-            ['strong', 'em', 'del'],
-            ['superscript', 'subscript'],
-            ['link'],
-            ['image'], // Our fresh created dropdown
-            ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-            ['unorderedList', 'orderedList'],
-            ['horizontalRule'],
-            ['removeformat'],
-            ['fullscreen'],
-            ['emoji'],
-            ['template']
-        ],
-        plugins: {
-            // Add imagur parameters to upload plugin for demo purposes
-            upload: {
-                serverPath: '/api/recap/upload',
-                fileFieldName: 'image',
-                headers: {
-                    'Authorization': JSON.parse(localStorage.getItem('user')).token
+    fetch('/views/recap_templates/template.html')
+        .then(r => r.text())
+        .then(html => {
+            $('#editor').trumbowyg({
+                btnsDef: {
+                    // Create a new dropdown
+                    image: {
+                        dropdown: ['insertImage', 'upload'],
+                        ico: 'insertImage'
+                    }
                 },
-                urlPropertyName: 'file'
-            },
-            templates: [
-                /*{
-                    name: 'Template 1',
-                    html: `<p>I am a template!</p>`
-                },*/
-                {
-                    name: 'Template 2',
-                    html: `<p>I am a different template!</p>`
+                // Redefine the button pane
+                btns: [
+                    ['viewHTML'],
+                    ['formatting'],
+                    ['strong', 'em', 'del'],
+                    ['superscript', 'subscript'],
+                    ['link'],
+                    ['image'], // Our fresh created dropdown
+                    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                    ['unorderedList', 'orderedList'],
+                    ['horizontalRule'],
+                    ['removeformat'],
+                    ['fullscreen'],
+                    ['emoji'],
+                    ['template']
+                ],
+                plugins: {
+                    // Add imagur parameters to upload plugin for demo purposes
+                    upload: {
+                        serverPath: '/api/recap/upload',
+                        fileFieldName: 'image',
+                        headers: {
+                            'Authorization': JSON.parse(localStorage.getItem('user')).token
+                        },
+                        urlPropertyName: 'file'
+                    },
+                    templates: [
+                        { name: 'Récap hebdo', html }
+                    ]
                 }
-            ]
-        }
-    });
+            });
+        });
 });
