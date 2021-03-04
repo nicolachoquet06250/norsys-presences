@@ -69,7 +69,11 @@ window.addEventListener('load', () => {
             .then(json => {
                 console.log(json);
             });
+    });
 
-        console.log(document.querySelector('#editor').innerHTML);
+    document.querySelector('#save_template').addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+
     })
 });
