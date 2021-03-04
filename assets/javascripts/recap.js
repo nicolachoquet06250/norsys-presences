@@ -56,6 +56,7 @@ window.addEventListener('load', () => {
                                                             .replace(/\>[\ ]+\</g, '><')
                                                             .replace(/\>[\ ]+(.)/g, '>$1')
                                                             .replace(/(.)[\ ]+\</g, '$1<')
+                                                            .replace(/(.+)\<a/g, '$1 <a')
                                                             .replace(/a\>(.+)\<\/a/g, 'a> $1 </a')
                                                             .replace(/\/a\>(.+)/g, '/a> $1') }
                     ]
