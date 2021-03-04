@@ -66,7 +66,7 @@ window.addEventListener('load', () => {
                     html: document.querySelector('#editor').innerHTML,
                     token: JSON.parse(localStorage.getItem('user')).token
                 })
-            }).then(r => r.text())
+            }).then(r => r.json())
             .then(json => {
                 console.log(json);
             });
