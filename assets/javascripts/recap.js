@@ -52,7 +52,7 @@ window.addEventListener('load', () => {
                         urlPropertyName: 'file'
                     },
                     templates: [
-                        { name: 'Récap hebdo', html: html.replace(/\n/g, '').replace(/\t/g, '') }
+                        { name: 'Récap hebdo', html: html.replace(/\n/g, '').replace(/\>[\ ]+\</g, '><').replace(/\>[\ ]+(.)/g, '>$1').replace(/(.)[\ ]+\</g, '$1<') }
                     ]
                 }
             });
