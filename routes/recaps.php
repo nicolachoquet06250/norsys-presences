@@ -26,9 +26,9 @@ Route::add('/api/recap/([0-9]+)', function($id) {}, 'get');
 Route::add('/api/recap', function() {
 	$body = getBody();
 	$token = $body['token'];
-	$user = json_decode(base64_decode($token));
+	$user = json_decode(base64_decode($token), true);
 
-	echo $body['html'] . '<pre>' . $user . '</pre>';
+	echo $body['html'] . $user['firstname'] . ' ' . $user['lastname'];
 }, 'post');
 
 Route::add('/api/recap/([0-9]+)', function() {}, 'put');
