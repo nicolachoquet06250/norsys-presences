@@ -11,7 +11,7 @@ Route::add('/api/recap/upload', function() {
 	if (move_uploaded_file($_FILES['image']['tmp_name'], $path)) {
 		echo json_encode([
 			'success' => true,
-			'file' => $_SERVER['SERVER_PROTOCOL'].'//'.$_SERVER['SERVER_NAME'].'/assets/recaps/images/'.basename($_FILES['image']['name'])
+			'file' => 'https://'.$_SERVER['SERVER_NAME'].'/assets/recaps/images/'.basename($_FILES['image']['name'])
 		]);
 	} else {
 		echo json_encode([ 'success' => false, 'message' => "Il y a eu un problème lors de l'upload" ]);
