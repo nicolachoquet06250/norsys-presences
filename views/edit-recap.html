@@ -96,49 +96,5 @@
             integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
             crossorigin="anonymous"></script>
     <script src="assets/javascripts/recap.js"></script>
-
-    <script>
-        window.addEventListener('load', () => {
-            $('#editor').trumbowyg({
-                btnsDef: {
-                    // Create a new dropdown
-                    image: {
-                        dropdown: ['insertImage', 'upload'],
-                        ico: 'insertImage'
-                    }
-                },
-                // Redefine the button pane
-                btns: [
-                    ['viewHTML'],
-                    ['formatting'],
-                    ['strong', 'em', 'del'],
-                    ['superscript', 'subscript'],
-                    ['link'],
-                    ['image'], // Our fresh created dropdown
-                    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-                    ['unorderedList', 'orderedList'],
-                    ['horizontalRule'],
-                    ['removeformat'],
-                    ['fullscreen'],
-                    ['emoji']
-                ],
-                plugins: {
-                    // Add imagur parameters to upload plugin for demo purposes
-                    upload: {
-                        serverPath: '/api/recap/upload',
-                        fileFieldName: 'image',
-                        headers: {
-                            'Authorization': JSON.parse(localStorage.getItem('user')).token
-                        },
-                        urlPropertyName: 'file'
-                    }
-                }
-            });
-
-            /*document.querySelector('.trumbowyg-insertImage-button').addEventListener('mousedown', e => {
-                console.log(e);
-            })*/
-        });
-    </script>
 </body>
 </html>
