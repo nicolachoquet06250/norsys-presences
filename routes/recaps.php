@@ -36,7 +36,7 @@ Route::add('/api/recap', function() {
 	$end = date('d', strtotime($week['last_day']));
 	$month = $monthes[intval(date('n', strtotime($week['first_day'])))];
 
-	echo str_replace(['%start%', '%end%', '%month%'], [$start, $end, $month], $body['html']);
+	echo $week['first_day']. ' ' . $week['last_day'] . ' ' . date('n', strtotime($week['first_day'])) . str_replace(['%start%', '%end%', '%month%'], [$start, $end, $month], $body['html']);
 }, 'post');
 
 Route::add('/api/recap/([0-9]+)', function() {}, 'put');
