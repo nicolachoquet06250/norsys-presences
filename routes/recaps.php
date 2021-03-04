@@ -109,3 +109,14 @@ Route::add('/api/recap', function() {
 Route::add('/api/recap/([0-9]+)', function() {}, 'put');
 
 Route::add('/api/recap/([0-9]+)', function() {}, 'delete');
+
+Route::add('/api/recap/save-template', function() {
+	$body = getBody();
+
+	if (empty($body['html']) === false) {
+		file_put_contents(__DIR__.'/../views/recap_templates/hebdo.html', $body['html']);
+	}
+	echo json_encode([
+		'error' => false
+	]);
+}, 'put');
