@@ -30,7 +30,7 @@ Route::add('/api/recap', function() {
 	$token = $body['token'];
 	$user = json_decode(base64_decode($token), true);
 
-	$email = $user['email'];
+	$agency = $user['agency'];
 
 	$week = get_week_extremity_days(date('W'), date('Y'));
 
@@ -38,9 +38,16 @@ Route::add('/api/recap', function() {
 	$end = date('d', strtotime($week['last_day']));
 	$month = $monthes[intval(date('n', strtotime($week['first_day'])))];
 
-	//echo str_replace(['%start%', '%end%', '%month%'], [$start, $end, $month], $body['html']);
+	$agency_users = [];
 
-	$html = '
+	try {
+		$db = getDB();
+
+		$request = $db->prepare('SELECT * FROM `users` WHERE agency_id = ( SELECT id FROM agencies WHERE name = :agency )', [ PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY ]);
+		$request->execute([ 'agency' => $agency ]);
+		$agency_users = $request->fetchAll(PDO::FETCH_ASSOC);
+
+		$html = '
 	<!DOCTYPE html>
 	<html lang="en">
 	<head>
@@ -52,23 +59,34 @@ Route::add('/api/recap', function() {
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/ui/trumbowyg.min.css" />
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.19.1/plugins/emoji/ui/trumbowyg.emoji.css" />
 	</head>
-	<body>
-		' . str_replace(['%start%', '%end%', '%month%'], [$start, $end, $month], $body['html']) . '
-	</body>
+	<body>' . str_replace(['%start%', '%end%', '%month%'], [$start, $end, $month], $body['html']) . '</body>
 	</html>';
 
-	$mail = smtpMailer($email, $html, 'Récap Hebdo Sophia ' . date('d/m/Y'));
-	
-	if ($mail === true) {
+		$object = 'Récap Hebdo Sophia ' . date('d/m/Y');
+
+		$mails = [];
+
+		foreach ($agency_users as $user) {
+			$mails[$user['email']] = smtpMailer($user['email'], $html, $object);
+		}
+
+		foreach ($mails as $mail) {
+			if ($mail !== true) {
+				exit(json_encode([
+					'error' => true,
+					'message' => $mail
+				]));
+			}
+		}
+
 		echo json_encode([
 			'error' => false
 		]);
-	} else {
-		echo json_encode([
-			'error' => true,
-			'message' => $mail
-		]);
+	} catch (Exception $e) {
+		
 	}
+
+	//echo str_replace(['%start%', '%end%', '%month%'], [$start, $end, $month], $body['html']);
 
 }, 'post');
 
