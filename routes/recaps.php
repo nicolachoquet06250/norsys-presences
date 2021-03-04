@@ -40,6 +40,8 @@ Route::add('/api/recap', function() {
 	$end = date('d', strtotime($week['last_day']));
 	$month = $monthes[intval(date('n', strtotime($week['first_day'])))];
 
+	$object = 'Récap Hebdo Sophia ' . date('d/m/Y');
+
 	$agency_users = [];
 
 	try {
@@ -77,8 +79,6 @@ Route::add('/api/recap', function() {
 	</head>
 	<body>' . str_replace(['%start%', '%end%', '%month%'], [$start, $end, $month], $body['html']) . '</body>
 	</html>';
-
-		$object = 'Récap Hebdo Sophia ' . date('d/m/Y');
 
 		$mails = [];
 
