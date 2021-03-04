@@ -53,10 +53,10 @@ window.addEventListener('load', () => {
                 urlPropertyName: 'file'
             },
             templates: [
-                {
+                /*{
                     name: 'Template 1',
                     html: `<p>I am a template!</p>`
-                },
+                },*/
                 {
                     name: 'Template 2',
                     html: `<p>I am a different template!</p>`
