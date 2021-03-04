@@ -30,13 +30,46 @@ Route::add('/api/recap', function() {
 	$token = $body['token'];
 	$user = json_decode(base64_decode($token), true);
 
+	$email = $user['email'];
+
 	$week = get_week_extremity_days(date('W'), date('Y'));
 
 	$start = date('d', strtotime($week['first_day']));
 	$end = date('d', strtotime($week['last_day']));
 	$month = $monthes[intval(date('n', strtotime($week['first_day'])))];
 
-	echo str_replace(['%start%', '%end%', '%month%'], [$start, $end, $month], $body['html']);
+	//echo str_replace(['%start%', '%end%', '%month%'], [$start, $end, $month], $body['html']);
+
+	$html = '
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<title>Norsys Sophia | Fiche de présence</title>
+			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" 
+				rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" 
+				crossorigin="anonymous">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/ui/trumbowyg.min.css" />
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.19.1/plugins/emoji/ui/trumbowyg.emoji.css" />
+	</head>
+	<body>
+		' . str_replace(['%start%', '%end%', '%month%'], [$start, $end, $month], $body['html']) . '
+	</body>
+	</html>';
+
+	$mail = smtpMailer($email, $html, 'Récap Hebdo Sophia ' . date('d/m/Y'));
+	
+	if ($mail === true) {
+		echo json_encode([
+			'error' => false
+		]);
+	} else {
+		echo json_encode([
+			'error' => true,
+			'message' => $mail
+		]);
+	}
+
 }, 'post');
 
 Route::add('/api/recap/([0-9]+)', function() {}, 'put');
