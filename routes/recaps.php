@@ -24,7 +24,7 @@ Route::add('/api/recaps', function() {}, 'get');
 Route::add('/api/recap/([0-9]+)', function($id) {}, 'get');
 
 Route::add('/api/recap', function() {
-	var_dump(getBody());
+	var_dump(getBody()['html']);
 }, 'post');
 
 Route::add('/api/recap/([0-9]+)', function() {}, 'put');

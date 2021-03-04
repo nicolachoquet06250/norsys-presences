@@ -62,7 +62,9 @@ window.addEventListener('load', () => {
 
         fetch('/api/recap', {
                 method: 'post',
-                body: document.querySelector('#editor').innerHTML
+                body: JSON.stringify({
+                    html: document.querySelector('#editor').innerHTML
+                })
             }).then(r => r.text())
             .then(json => {
                 console.log(json);
