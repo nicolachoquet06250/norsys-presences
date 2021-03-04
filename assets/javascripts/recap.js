@@ -1,5 +1,10 @@
 
 
+document.querySelector('#logout').addEventListener('click', () => {
+  localStorage.removeItem('user');
+  window.location.href = '/login';
+});
+
 window.addEventListener('load', () => {
     const today = new Date();
     const days = ['', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
@@ -11,7 +16,7 @@ window.addEventListener('load', () => {
     document.querySelector('#profile span').innerHTML = user.lastname + ' ' + user.firstname.substr(0, 1) + '.';
     document.querySelector('#profile span + strong').innerHTML = user.agency;
 
-    
+
 
     $('#editor').trumbowyg({
         btnsDef: {
