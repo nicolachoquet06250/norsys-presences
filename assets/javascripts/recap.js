@@ -19,6 +19,8 @@ window.addEventListener('load', () => {
     fetch('/views/recap_templates/template.html')
         .then(r => r.text())
         .then(html => {
+            console.log(html);
+            
             $('#editor').trumbowyg({
                 btnsDef: {
                     // Create a new dropdown
