@@ -19,6 +19,15 @@ window.addEventListener('load', () => {
     fetch('/views/recap_templates/hebdo.html')
         .then(r => r.text())
         .then(html => {
+            console.log(html.replace(/\n/g, '')
+                                                            .replace(/\>[\ ]+\</g, '><')
+                                                            .replace(/\>[\ ]+(.)/g, '>$1')
+                                                            .replace(/(.)[\ ]+\</g, '$1<')
+                                                            .replace(/(.+)\<([a-zA-Z])/g, '$1 <$2')
+                                                            .replace(/([a-zA-Z])\>(.+)\<\/([a-zA-Z])/g, '$1> $2 </$3')
+                                                            .replace(/\/([a-zA-Z])\>(.+)/g, '/$1> $2')
+                                                            .replace(/\"\>(.+)/g, '"> $1'));
+
             $('#editor').trumbowyg({
                 btnsDef: {
                     // Create a new dropdown
