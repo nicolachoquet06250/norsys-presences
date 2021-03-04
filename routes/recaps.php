@@ -32,8 +32,8 @@ Route::add('/api/recap', function() {
 
 	$week = get_week_extremity_days(date('W'), date('Y'));
 
-	$start = date('d', strtotime($week['first_day']));
-	$end = date('d', strtotime($week['last_day']));
+	$start = date('d/m/Y', strtotime($week['first_day']));
+	$end = date('d/m/Y', strtotime($week['last_day']));
 	$month = $monthes[intval(date('n', strtotime($week['first_day'])))];
 
 	echo $week['first_day']. ' ' . $week['last_day'] . ' ' . date('m', strtotime($week['first_day'])) . str_replace(['%start%', '%end%', '%month%'], [$start, $end, $month], $body['html']);
