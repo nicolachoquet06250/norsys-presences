@@ -1,8 +1,6 @@
-
-
 document.querySelector('#logout').addEventListener('click', () => {
-  localStorage.removeItem('user');
-  window.location.href = '/login';
+    localStorage.removeItem('user');
+    window.location.href = '/login';
 });
 
 window.addEventListener('load', () => {
@@ -11,7 +9,7 @@ window.addEventListener('load', () => {
     const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
     document.querySelector('#today').innerHTML = days[today.getDay()] + ' ' + today.getDate() + ' ' + months[today.getMonth()] + ' ' + today.getFullYear();
 
-  
+
     const user = JSON.parse(localStorage.getItem('user'));
     document.querySelector('#profile span').innerHTML = user.lastname + ' ' + user.firstname.substr(0, 1) + '.';
     document.querySelector('#profile span + strong').innerHTML = user.agency;
