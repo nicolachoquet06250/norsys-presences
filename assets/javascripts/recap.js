@@ -60,6 +60,14 @@ window.addEventListener('load', () => {
         e.preventDefault()
         e.stopPropagation();
 
+        fetch('/api/recap', {
+                method: 'post',
+                body: document.querySelector('#editor').innerHTML
+            }).then(r => r.text())
+            .then(json => {
+                console.log(json);
+            });
+
         console.log(document.querySelector('#editor').innerHTML);
     })
 });
