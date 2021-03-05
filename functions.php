@@ -4,7 +4,10 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 function getDB() {
-	return new PDO('mysql:host=mysql-nicolas-choquet-2.alwaysdata.net;dbname=nicolas-choquet-2_norsys_sophia_presences', '156090', '2669NICOLAS2107');
+	if (!defined('DB_ENGINE') || !defined('DB_HOST') || !defined('DB_NAME') || !defined('DB_USER') || !defined('DB_PASSWORD')) {
+		throw new Exception('Vous devez définir des crédentials pour la base de donnée');
+	}
+	return new PDO(DB_ENGINE . ':host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
 }
 
 function getBody() {
@@ -20,8 +23,8 @@ function smtpMailer($to, $body, $subject, ...$attachments) {
 	$mail->SMTPDebug = SMTP::DEBUG_OFF;  // debogage: 1 = Erreurs et messages, 2 = messages seulement
 	$mail->SMTPAuth = true;  // Authentification SMTP active
 	$mail->SMTPSecure = false; // Gmail REQUIERT Le transfert securise
-	$mail->Host = 'smtp-nicolas-choquet.alwaysdata.net';
-	$mail->Port = 25;
+	$mail->Host = EMAIL_HOST;
+	$mail->Port = EMAIL_PORT;
 	//$mail->Username = 'norsys@nicolaschoquet.fr';
 	//$mail->Password = '2669NICOLAS2107';
 	$mail->Username = EMAIL;
@@ -33,7 +36,7 @@ function smtpMailer($to, $body, $subject, ...$attachments) {
 	$mail->CharSet = 'UTF-8';
 	
 	foreach ($attachments as $attachment) {
-    $mail->addAttachment($attachment); 
+    	$mail->addAttachment($attachment); 
 	}
 	
 	if(!$mail->Send()) {
