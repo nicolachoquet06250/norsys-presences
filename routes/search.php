@@ -45,7 +45,7 @@ Route::add('/api/search/history', function () {
   try {
     $db = getDB();
     
-    $request = $db->query('SELECT DATE_FORMAT(arrival_date, \'%Y-%m-%d\') arrival_date FROM `presences` GROUP BY DATE_FORMAT(arrival_date, \'%Y-%m-%d\')');
+    $request = $db->query('SELECT DATE_FORMAT(arrival_date, \'%Y-%m-%d\') arrival_date FROM `presences` GROUP BY DATE_FORMAT(arrival_date, \'%Y-%m-%d\') ORDER BY arrival_date DESC ');
     $results = $request->fetchAll(PDO::FETCH_ASSOC);
     
     $results = array_map(fn($e) => $e['arrival_date'], $results);
