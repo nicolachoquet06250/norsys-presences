@@ -1,3 +1,16 @@
+function parseQueryString() {
+    const queryString = window.location.search.replace('?', '').split('&');
+    let tmp = {};
+    for (let q of queryString) {
+        if (q.indexOf('=') === -1) {
+            tmp[q] = true;
+        } else {
+            tmp[q.split('=')[0]] = q.split('=')[1].replace(/%20/g, ' ');
+        }
+    }
+    return tmp;
+}
+
 document.querySelector('#logout').addEventListener('click', () => {
     localStorage.removeItem('user');
     window.location.href = '/login';
@@ -106,6 +119,16 @@ window.addEventListener('load', () => {
                 for (let recap of json) {
                     document.querySelector('.historique-recap-container').innerHTML += template(recap);
                 }
+            })
+    }
+
+    if (window.location.pathname === '/recap' && parseQueryString().id) {
+        const token = JSON.parse(localStorage.getItem('user')).token;
+        fetch(`/api/recap/${parseQueryString().id}/${token}`)
+            .then(r => r.json())
+            .then(json => {
+                document.querySelector('#object').innerHTML = json.object;
+                document.querySelector('#content').innerHTML = json.content;
             })
     }
 });
