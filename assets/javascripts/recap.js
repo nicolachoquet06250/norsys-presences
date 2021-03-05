@@ -137,9 +137,10 @@ if (document.querySelector('.historique-recap-container')) {
             <div class="col-12 d-flex justify-content-center">
                 <strong>Aucun Récap hebdo n'à précédement été enregistré</strong>
             </div>`;
+
             document.querySelector('.historique-recap-container').innerHTML = '';
             if (json.length === 0) {
-
+                document.querySelector('.historique-recap-container').innerHTML += void_template();
             }
 
             for (let recap of json) {
