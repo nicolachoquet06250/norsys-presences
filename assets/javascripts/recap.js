@@ -94,7 +94,12 @@ window.addEventListener('load', () => {
             e.preventDefault();
             e.stopPropagation();
 
-            console.log('coucou');
+            fetch('/api/recap/save-template', {
+                method: 'put',
+                body: JSON.stringify({
+                    html: document.querySelector('#editor').innerHTML
+                })
+            })
         });
     }
 
