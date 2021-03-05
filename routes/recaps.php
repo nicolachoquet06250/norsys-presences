@@ -156,8 +156,8 @@ Route::add('/api/recap', function() {
 			]);
 
 			$html = '
-		<!DOCTYPE html>
-		<html lang="en">
+		<!DOCTYPE HTML PUBLIC "~//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+		<html lang="fr">
 		<head>
 				<meta name="viewport" content="width=device-width, initial-scale=1">
 				<title>Norsys Sophia | Fiche de présence</title>
