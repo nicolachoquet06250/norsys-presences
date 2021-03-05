@@ -137,10 +137,23 @@ Route::add('/api/recap', function() {
 		try {
 			$db = getDB();
 
-			$request = $db->prepare('SELECT * FROM `users` WHERE agency_id = ( SELECT id FROM agencies WHERE name = :agency )', [ PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY ]);
+			$request = $db->prepare('SELECT mailing_list FROM `agencies` WHERE name = :agency', [ PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY ]);
 			$request->execute([ 'agency' => $agency ]);
-			$agency_users = $request->fetchAll(PDO::FETCH_ASSOC);
+			$agency_users = $request->fetch(PDO::FETCH_ASSOC);
 
+			if (!empty($agency_users) && $agency_users['mailing_list'] === null) {
+				$request = $db->prepare('SELECT * FROM `users` WHERE agency_id = ( SELECT id FROM agencies WHERE name = :agency )', [ PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY ]);
+				$request->execute([ 'agency' => $agency ]);
+				$agency_users = $request->fetchAll(PDO::FETCH_ASSOC);
+			} else {
+				$agency_users = [
+					[
+						'email' => $agency_users['mailing_list']
+					]
+				];
+			}
+			
+			// DEBUG
 			/*$agency_users = [
 				[
 					'email' => $email
