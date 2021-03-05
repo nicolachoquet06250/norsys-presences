@@ -95,7 +95,7 @@ window.addEventListener('load', () => {
                     <div class="col-12 col-md-6">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">${new Date(recap.creation_date).getDate()}/${new Date(recap.creation_date).getMonth() + 1}/${new Date(recap.creation_date).getFullYear()}</h5>
+                                <h5 class="card-title">${new Date(recap.creation_date).getDate() < 10? '0' : ''}${new Date(recap.creation_date).getDate()}/${new Date(recap.creation_date).getMonth() < 10? '0' : ''}${new Date(recap.creation_date).getMonth() + 1}/${new Date(recap.creation_date).getFullYear()}</h5>
                                 <p class="card-text">${recap.object}</p>
                                 <a href="/recap?id=${recap.id}" class="btn btn-primary">Voir plus</a>
                             </div>
