@@ -127,9 +127,12 @@ window.addEventListener('load', () => {
         fetch(`/api/recap/${parseQueryString().id}/${token}`)
             .then(r => r.json())
             .then(json => {
-
+                let content = json.content;
+                for (let variable of Object.keys(json.vars)) {
+                    content = content.replace(`%${variable}%`, json.vars[variable]);
+                }
                 document.querySelector('#object').innerHTML = json.object;
-                document.querySelector('#content').innerHTML = json.content;
+                document.querySelector('#content').innerHTML = content;
             })
     }
 });
