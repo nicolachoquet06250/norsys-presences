@@ -87,7 +87,7 @@ window.addEventListener('load', () => {
 
     if (document.querySelector('.historique-recap-container')) {
         const token = JSON.parse(localStorage.getItem('user')).token;
-        fetch(`'/api/recaps/${token}`)
+        fetch(`/api/recaps/${token}`)
             .then(r => r.json())
             .then(json => {
                 const template = recap => `
