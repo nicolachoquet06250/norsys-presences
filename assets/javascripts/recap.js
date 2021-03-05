@@ -85,7 +85,7 @@ window.addEventListener('load', () => {
         });
     }
 
-    if (document.querySelector('.historique-recap-list')) {
+    if (document.querySelector('.historique-recap-container')) {
         const token = JSON.parse(localStorage.getItem('user')).token;
         fetch(`'/api/recaps/${token}`)
             .then(r => r.json())
@@ -102,7 +102,7 @@ window.addEventListener('load', () => {
                         </div>
                     </div>
                 </div>`;
-                document.querySelector('.histique-recap-list').innerHTML = '';
+                document.querySelector('.historique-recap-container').innerHTML = '';
                 for (let recap of json) {
                     document.querySelector('.histique-recap-list').innerHTML += template(recap);
                 }
