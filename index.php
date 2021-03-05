@@ -4,6 +4,9 @@ ini_set('display_errors', '1');
 
 require __DIR__.'/vendor/autoload.php';
 
+/* Functions */
+include __DIR__.'/functions.php';
+
 use Steampixel\Route;
 
 if (!file_exists(__DIR__.'/config.json')) {
@@ -11,9 +14,6 @@ if (!file_exists(__DIR__.'/config.json')) {
 }
 
 init_config();
-
-/* Functions */
-include __DIR__.'/functions.php';
 
 $dir = opendir(__DIR__.'/routes');
 while (($elem = readdir($dir)) !== false) {
