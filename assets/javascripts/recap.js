@@ -94,6 +94,9 @@ window.addEventListener('load', () => {
             e.preventDefault();
             e.stopPropagation();
 
+            document.querySelector('.loader').classList.remove('d-none');
+            document.querySelector('.loader').classList.add('d-flex');
+
             fetch('/api/recap/save-template', {
                     method: 'put',
                     body: JSON.stringify({
@@ -102,8 +105,8 @@ window.addEventListener('load', () => {
                 }).then(r => r.json())
                 .then(json => {
                     if (!json.error) {
-                        document.querySelector('.loader').classList.remove('d-none');
-                        document.querySelector('.loader').classList.remove('d-none');
+                        document.querySelector('.loader').classList.add('d-none');
+                        document.querySelector('.loader').classList.remove('d-flex');
                     }
                 })
         });
