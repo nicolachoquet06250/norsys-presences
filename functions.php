@@ -22,9 +22,11 @@ function smtpMailer($to, $body, $subject, ...$attachments) {
 	$mail->SMTPSecure = false; // Gmail REQUIERT Le transfert securise
 	$mail->Host = 'smtp-nicolas-choquet.alwaysdata.net';
 	$mail->Port = 25;
-	$mail->Username = 'norsys@nicolaschoquet.fr';
-	$mail->Password = '2669NICOLAS2107';
-	$mail->SetFrom($mail->Username, 'Norsys');
+	//$mail->Username = 'norsys@nicolaschoquet.fr';
+	//$mail->Password = '2669NICOLAS2107';
+	$mail->Username = EMAIL;
+	$mail->Password = EMAIL_PASSWORD;
+	$mail->SetFrom($mail->Username, EMAIL_NAME);
 	$mail->Subject = $subject;
 	$mail->Body = $body;
 	$mail->AddAddress($to);
@@ -60,4 +62,15 @@ function get_week_extremity_days($week_number, $year){
       'first_day' => date("Y-m-d", strtotime('First Monday January ' . $year . ' +' . ($week_number - 1) . ' Week')),
       'last_day' => date("Y-m-d", strtotime('First Monday January ' . $year . ' +' . $week_number . ' Week -3 day'))
   ];
+}
+
+function init_config() {
+	$config = file_get_contents(__DIR__.'/config.json');
+	$config = json_decode($config, true);
+	
+	foreach ($config as $key => $value) {
+		if (!defined($key)) {
+			define($key, $value);
+		}
+	}
 }

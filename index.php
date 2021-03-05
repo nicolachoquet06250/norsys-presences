@@ -6,6 +6,12 @@ require __DIR__.'/vendor/autoload.php';
 
 use Steampixel\Route;
 
+if (!file_exists(__DIR__.'/config.json')) {
+    exit('Un fichier de configuration doit être présent !!');
+}
+
+init_config();
+
 /* Functions */
 include __DIR__.'/functions.php';
 
