@@ -86,8 +86,12 @@ Route::add('/api/recap/([0-9]+)/([^\/]+)', function($id, $token) {
 			'id' => $id
 		]);
 		$result = $request->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($result);
 	} catch (Exception $e) {
-
+		exit(json_encode([
+			'error' => true,
+			'message' => $e->getMessage()
+		]));
 	}
 }, 'get');
 
