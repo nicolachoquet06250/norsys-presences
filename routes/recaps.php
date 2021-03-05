@@ -112,6 +112,8 @@ Route::add('/api/recap/([0-9]+)/([^\/]+)', function($id, $token) {
 }, 'get');
 
 Route::add('/api/recap', function() {
+	$monthes = ['', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'septembre', 'Octobre', 'Novembre', 'Décembre'];
+
 	$body = getBody();
 
 	if (empty($body['html']) === false) {
