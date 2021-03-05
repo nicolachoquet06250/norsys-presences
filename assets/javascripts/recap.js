@@ -95,11 +95,17 @@ window.addEventListener('load', () => {
             e.stopPropagation();
 
             fetch('/api/recap/save-template', {
-                method: 'put',
-                body: JSON.stringify({
-                    html: document.querySelector('#editor').innerHTML
+                    method: 'put',
+                    body: JSON.stringify({
+                        html: document.querySelector('#editor').innerHTML
+                    })
+                }).then(r => r.json())
+                .then(json => {
+                    if (!json.error) {
+                        document.querySelector('.loader').classList.remove('d-none');
+                        document.querySelector('.loader').classList.remove('d-none');
+                    }
                 })
-            })
         });
     }
 
