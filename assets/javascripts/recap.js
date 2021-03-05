@@ -76,6 +76,9 @@ window.addEventListener('load', () => {
             e.preventDefault()
             e.stopPropagation();
 
+            document.querySelector('.loader').classList.remove('d-none');
+            document.querySelector('.loader').classList.add('d-flex');
+
             fetch('/api/recap', {
                     method: 'post',
                     body: JSON.stringify({
@@ -84,7 +87,10 @@ window.addEventListener('load', () => {
                     })
                 }).then(r => r.json())
                 .then(json => {
-                    console.log(json);
+                    if (!json.error) {
+                        document.querySelector('.loader').classList.add('d-none');
+                        document.querySelector('.loader').classList.remove('d-flex');
+                    }
                 });
         });
     }
