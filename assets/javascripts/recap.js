@@ -27,7 +27,7 @@ window.addEventListener('load', () => {
     document.querySelector('#profile span').innerHTML = user.lastname + ' ' + user.firstname.substr(0, 1) + '.';
     document.querySelector('#profile span + strong').innerHTML = user.agency;
 
-    if (document.querySelector('editor')) {
+    if (document.querySelector('#editor')) {
         fetch('/views/recap_templates/hebdo.html')
             .then(r => r.text())
             .then(html => {
