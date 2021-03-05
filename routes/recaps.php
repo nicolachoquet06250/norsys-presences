@@ -80,7 +80,7 @@ Route::add('/api/recap/([0-9]+)/([^\/]+)', function($id, $token) {
 												ON recap.user_id = users.id 
 												WHERE recap.agency_id = (
 													SELECT id FROM agencies WHERE name = :agency
-												) AND id = :id', [ PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY ]);
+												) AND recap.id = :id', [ PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY ]);
 		$request->execute([
 			'agency' => $token['agency'],
 			'id' => $id
