@@ -137,15 +137,15 @@ Route::add('/api/recap', function() {
 		try {
 			$db = getDB();
 
-			/*$request = $db->prepare('SELECT * FROM `users` WHERE agency_id = ( SELECT id FROM agencies WHERE name = :agency )', [ PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY ]);
+			$request = $db->prepare('SELECT * FROM `users` WHERE agency_id = ( SELECT id FROM agencies WHERE name = :agency )', [ PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY ]);
 			$request->execute([ 'agency' => $agency ]);
-			$agency_users = $request->fetchAll(PDO::FETCH_ASSOC);*/
+			$agency_users = $request->fetchAll(PDO::FETCH_ASSOC);
 
-			$agency_users = [
+			/*$agency_users = [
 				[
 					'email' => $email
 				]
-			];
+			];*/
 
 			$request = $db->prepare('INSERT INTO recap (`user_id`, `agency_id`, `object`, `content`) VALUES(:user_id, (SELECT id FROM agencies WHERE name = :agency), :object, :content)', [ PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY ]);
 			$request->execute([
