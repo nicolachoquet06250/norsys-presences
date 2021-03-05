@@ -91,12 +91,14 @@ window.addEventListener('load', () => {
             .then(r => r.json())
             .then(json => {
                 const template = recap => `
-                <div class="col-12 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">${new Date(reap.creation_date).getDate()}/${new Date(reap.creation_date).getMonth() + 1}/${new Date(reap.creation_date).getFullYear()}</h5>
-                            <p class="card-text">${recap.object}</p>
-                            <a href="/recap?id=${recap.id}" class="btn btn-primary">Voir plus</a>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">${new Date(reap.creation_date).getDate()}/${new Date(reap.creation_date).getMonth() + 1}/${new Date(reap.creation_date).getFullYear()}</h5>
+                                <p class="card-text">${recap.object}</p>
+                                <a href="/recap?id=${recap.id}" class="btn btn-primary">Voir plus</a>
+                            </div>
                         </div>
                     </div>
                 </div>`;
