@@ -127,6 +127,7 @@ window.addEventListener('load', () => {
         fetch(`/api/recap/${parseQueryString().id}/${token}`)
             .then(r => r.json())
             .then(json => {
+
                 document.querySelector('#object').innerHTML = json.object;
                 document.querySelector('#content').innerHTML = json.content;
             })

@@ -58,6 +58,8 @@ Route::add('/api/recaps/([^\/]+)', function($token) {
 }, 'get');
 
 Route::add('/api/recap/([0-9]+)/([^\/]+)', function($id, $token) {
+	$monthes = ['', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'septembre', 'Octobre', 'Novembre', 'Décembre'];
+
 	try {
 		if (empty($token)) {
 			throw new Exception('Authentification invalide');
@@ -87,6 +89,19 @@ Route::add('/api/recap/([0-9]+)/([^\/]+)', function($id, $token) {
 		]);
 		$result = $request->fetchAll(PDO::FETCH_ASSOC);
 		if (empty($result) === false) $result = $result[0];
+
+		$week = get_week_extremity_days(date('W', strtotime($result['creation_date'])), date('Y', strtotime($result['creation_date'])));
+
+		$start = date('d', strtotime($week['first_day']));
+		$end = date('d', strtotime($week['last_day']));
+		$month = $monthes[intval(date('n', strtotime($week['first_day'])))];
+
+		$result['vars'] = [
+			'start' => $start,
+			'end' => $end,
+			'month' => $month
+		];
+
 		echo json_encode($result);
 	} catch (Exception $e) {
 		exit(json_encode([
@@ -97,8 +112,6 @@ Route::add('/api/recap/([0-9]+)/([^\/]+)', function($id, $token) {
 }, 'get');
 
 Route::add('/api/recap', function() {
-	$monthes = ['', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'septembre', 'Octobre', 'Novembre', 'Décembre'];
-
 	$body = getBody();
 
 	if (empty($body['html']) === false) {
