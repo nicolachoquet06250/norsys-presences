@@ -104,7 +104,7 @@ window.addEventListener('load', () => {
                 </div>`;
                 document.querySelector('.historique-recap-container').innerHTML = '';
                 for (let recap of json) {
-                    document.querySelector('.histique-recap-list').innerHTML += template(recap);
+                    document.querySelector('.historique-recap-container').innerHTML += template(recap);
                 }
             })
     }
