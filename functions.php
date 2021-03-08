@@ -23,12 +23,14 @@ function smtpMailer($to, $body, $subject, ...$attachments) {
 	$mail->SMTPDebug = SMTP::DEBUG_OFF;  // debogage: 1 = Erreurs et messages, 2 = messages seulement
 	$mail->SMTPAuth = true;  // Authentification SMTP active
 	$mail->SMTPSecure = false; // Gmail REQUIERT Le transfert securise
+	if (defined(EMAIL_ENCRIPTION) && EMAIL_ENCRIPTION) {
+		$mail->SMTPSecure = EMAIL_ENCRIPTION;
+	}
 	$mail->Host = EMAIL_HOST;
 	$mail->Port = EMAIL_PORT;
-	//$mail->Username = 'norsys@nicolaschoquet.fr';
-	//$mail->Password = '2669NICOLAS2107';
 	$mail->Username = EMAIL;
 	$mail->Password = EMAIL_PASSWORD;
+	var_dump($mail->Username, EMAIL_NAME);
 	$mail->SetFrom($mail->Username, EMAIL_NAME);
 	$mail->Subject = $subject;
 	$mail->Body = $body;
