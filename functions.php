@@ -26,7 +26,6 @@ function smtpMailer($to, $body, $subject, ...$attachments) {
 	if (defined('EMAIL_ENCRIPTION') && EMAIL_ENCRIPTION) {
 		$mail->SMTPSecure = EMAIL_ENCRIPTION;
 	}
-	var_dump($mail->SMTPSecure);
 	$mail->Host = EMAIL_HOST;
 	$mail->Port = EMAIL_PORT;
 	$mail->Username = EMAIL;
