@@ -31,7 +31,6 @@ function smtpMailer($to, $body, $subject, ...$attachments) {
 	$mail->Port = EMAIL_PORT;
 	$mail->Username = EMAIL;
 	$mail->Password = EMAIL_PASSWORD;
-	var_dump($mail->Username, EMAIL_NAME);
 	$mail->SetFrom($mail->Username, EMAIL_NAME);
 	$mail->Subject = $subject;
 	$mail->Body = $body;
