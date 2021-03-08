@@ -23,9 +23,10 @@ function smtpMailer($to, $body, $subject, ...$attachments) {
 	$mail->SMTPDebug = SMTP::DEBUG_OFF;  // debogage: 1 = Erreurs et messages, 2 = messages seulement
 	$mail->SMTPAuth = true;  // Authentification SMTP active
 	$mail->SMTPSecure = false; // Gmail REQUIERT Le transfert securise
-	if (defined(EMAIL_ENCRIPTION) && EMAIL_ENCRIPTION) {
+	if (defined('EMAIL_ENCRIPTION') && EMAIL_ENCRIPTION) {
 		$mail->SMTPSecure = EMAIL_ENCRIPTION;
 	}
+	var_dump($mail->SMTPSecure);
 	$mail->Host = EMAIL_HOST;
 	$mail->Port = EMAIL_PORT;
 	$mail->Username = EMAIL;
@@ -36,11 +37,11 @@ function smtpMailer($to, $body, $subject, ...$attachments) {
 	$mail->Body = $body;
 	$mail->AddAddress($to);
 	$mail->CharSet = 'UTF-8';
-	
+
 	foreach ($attachments as $attachment) {
-    	$mail->addAttachment($attachment); 
+    		$mail->addAttachment($attachment);
 	}
-	
+
 	if(!$mail->Send()) {
 		return 'Mail error: '.$mail->ErrorInfo;
 	} else {
