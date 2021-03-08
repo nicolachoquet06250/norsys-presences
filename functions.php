@@ -33,7 +33,13 @@ function smtpMailer($to, $body, $subject, ...$attachments) {
 	$mail->SetFrom($mail->Username, EMAIL_NAME);
 	$mail->Subject = $subject;
 	$mail->Body = $body;
-	$mail->AddAddress($to);
+	if (is_string($to)) {
+		$mail->AddAddress($to);
+	} elseif (is_array($to)) {
+		foreach ($$to as $email) {
+			$mail->AddAddress($email);
+		}
+	}
 	$mail->CharSet = 'UTF-8';
 
 	foreach ($attachments as $attachment) {

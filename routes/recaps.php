@@ -185,17 +185,17 @@ Route::add('/api/recap', function() {
 
 			$mails = [];
 
-			foreach ($agency_users as $user) {
-				$mails[$user['email']] = smtpMailer($user['email'], $html, $object);
-			}
+			$agency_users = array_map(function($c) {
+				return $c['email'];
+			}, $agency_users);
 
-			foreach ($mails as $mail) {
-				if ($mail !== true) {
-					exit(json_encode([
-						'error' => true,
-						'message' => $mail
-					]));
-				}
+			$mail = smtpMailer($agency_users, $html, $object);
+
+			if ($mail !== true) {
+				exit(json_encode([
+					'error' => true,
+					'message' => $mail
+				]));
 			}
 
 			echo json_encode([
