@@ -38,7 +38,7 @@ Route::add('/api/calendar/([0-9]{0,4})/([0-9]{0,2})', function ($year, $month) {
                                   WHERE DATE_FORMAT(date, \'%Y-%m-%d\') = :date', 
                                   [ PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY ]);
   		$request->execute([
-  		  'date' => $year.'-'.($month < 10 ? '0' : '').$month.'-'.($i < 10 ? '0' : '').($i + 1)
+  		  'date' => $year.'-'.($month < 10 ? '0' : '').$month.'-'.($i + 1 < 10 ? '0' : '').($i + 1)
   		]);
   		$reservations = $request->fetchAll(PDO::FETCH_ASSOC);
   		
