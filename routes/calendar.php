@@ -43,7 +43,7 @@ Route::add('/api/calendar/([0-9]{0,4})/([0-9]{0,2})', function ($year, $month) {
   		$reservations = $request->fetchAll(PDO::FETCH_ASSOC);
   		
       ob_start();
-      var_dump($year.'-'.($month < 10 ? '0' : '').$month.'-'.($i < 10 ? '0' : '').($i + 1).' '.$reservations);
+      var_dump($year.'-'.($month < 10 ? '0' : '').$month.'-'.($i < 10 ? '0' : '').($i + 1), $reservations);
       file_put_contents(__DIR__.'/test.txt', ob_get_flush());
       
   		$request = $db->prepare('SELECT `presences`.id, 
