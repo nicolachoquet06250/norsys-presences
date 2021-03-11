@@ -1,6 +1,8 @@
 <?php
 
-ini_set('display_errors', '1');
+//ini_set('display_errors', '1');
+
+header("Access-Control-Allow-Origin: *");
 
 require __DIR__.'/vendor/autoload.php';
 
