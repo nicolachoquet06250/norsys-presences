@@ -29,7 +29,7 @@ Route::add('/recap/list', function() {
   echo file_get_contents(__DIR__.'/../views/list-recaps.html');
 }, 'get');
 
-Route::add('/views/recap_templates/hebdo.html', function() {
+Route::add('/templates/hebdo.html', function() {
   header('Access-Control-Allow-Origin: *');
   $content = file_get_contents(__DIR__.'../views/recap_templates/hebdo.html');
 }, 'get');
