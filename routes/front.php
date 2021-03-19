@@ -1,7 +1,7 @@
 <?php
 use Steampixel\Route;
 
-Route::add('/', function () {
+/*Route::add('/', function () {
   echo file_get_contents(__DIR__.'/../views/home.html');
 }, 'get');
 
@@ -27,7 +27,7 @@ Route::add('/recap/edit', function() {
 
 Route::add('/recap/list', function() {
   echo file_get_contents(__DIR__.'/../views/list-recaps.html');
-}, 'get');
+}, 'get');*/
 
 Route::add('/templates/hebdo.html', function() {
   header('Access-Control-Allow-Origin: *');
