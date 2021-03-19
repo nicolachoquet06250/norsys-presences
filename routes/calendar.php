@@ -1,6 +1,70 @@
 <?php
 use Steampixel\Route;
 
+function delete_reservation() {
+  $body = getBody();
+  $user_id = $body['user_id'];
+  $date = $body['date'];
+  
+  try {
+    if (empty($user_id) || empty($date)) {
+      throw new Exception('Une erreur est survenue lors de l\'annulation de votre réservation');
+    }
+    
+    $db = getDB();
+    $request = $db->prepare('DELETE FROM `reservations` WHERE `id_user` = :id_user AND DATE_FORMAT(date, \'%Y-%m-%d\') = :date', [
+			PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY
+		]);
+		$request->execute([
+		  'id_user' => $user_id,
+		  'date' => explode('-', $date)[0].'-'.(intval(explode('-', $date)[1]) < 10 ? '0' : '').explode('-', $date)[1].'-'.(intval(explode('-', $date)[2]) < 10 ? '0' : '').explode('-', $date)[2]
+		]);
+		
+		echo json_encode([
+		  'error' => false,
+		  'user_id' => intval($user_id),
+		  'date' => $date
+		]);
+  }
+  catch(Exception $e) {
+    exit(json_encode([
+      'error' => true,
+      'message' => $e->getMessage()
+    ]));
+  }
+}
+
+function add_reservation() {
+  $user_id = $body['user_id'];
+  $date = $body['date'];
+  try {
+    if (empty($user_id) || empty($date)) {
+      throw new Exception('Une erreur est survenue lors de l\'enregistrement de votre réservation');
+    }
+    
+    $db = getDB();
+    $request = $db->prepare('INSERT INTO `reservations` (`id_user`, `date`) VALUES(:id_user, :date)', [
+			PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY
+		]);
+		$request->execute([
+		  'id_user' => $user_id,
+		  'date' => $date
+		]);
+		
+		echo json_encode([
+		  'error' => false,
+		  'user_id' => intval($user_id),
+		  'date' => $date
+		]);
+  }
+  catch(Exception $e) {
+    exit(json_encode([
+      'error' => true,
+      'message' => $e->getMessage()
+    ]));
+  }
+}
+
 Route::add('/api/calendar/([0-9]{0,4})/([0-9]{0,2})', function ($year, $month) {
   $days = nbDaysInMonth($month, $year);
   $previous_month = $month;
@@ -85,65 +149,13 @@ Route::add('/api/calendar/([0-9]{0,4})/([0-9]{0,2})', function ($year, $month) {
 
 Route::add('/api/reservation', function () {
   $body = getBody();
-  $user_id = $body['user_id'];
-  $date = $body['date'];
-  try {
-    if (empty($user_id) || empty($date)) {
-      throw new Exception('Une erreur est survenue lors de l\'enregistrement de votre réservation');
-    }
-    
-    $db = getDB();
-    $request = $db->prepare('INSERT INTO `reservations` (`id_user`, `date`) VALUES(:id_user, :date)', [
-			PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY
-		]);
-		$request->execute([
-		  'id_user' => $user_id,
-		  'date' => $date
-		]);
-		
-		echo json_encode([
-		  'error' => false,
-		  'user_id' => intval($user_id),
-		  'date' => $date
-		]);
+  if (isset($body['method']) && strtolower($body['method']) === 'delete') {
+    delete_reservation();
   }
-  catch(Exception $e) {
-    exit(json_encode([
-      'error' => true,
-      'message' => $e->getMessage()
-    ]));
-  }
+
+  add_reservation();
 }, 'post');
 
 Route::add('/api/reservation', function() {
-  $body = getBody();
-  $user_id = $body['user_id'];
-  $date = $body['date'];
-  
-  try {
-    if (empty($user_id) || empty($date)) {
-      throw new Exception('Une erreur est survenue lors de l\'annulation de votre réservation');
-    }
-    
-    $db = getDB();
-    $request = $db->prepare('DELETE FROM `reservations` WHERE `id_user` = :id_user AND DATE_FORMAT(date, \'%Y-%m-%d\') = :date', [
-			PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY
-		]);
-		$request->execute([
-		  'id_user' => $user_id,
-		  'date' => explode('-', $date)[0].'-'.(intval(explode('-', $date)[1]) < 10 ? '0' : '').explode('-', $date)[1].'-'.(intval(explode('-', $date)[2]) < 10 ? '0' : '').explode('-', $date)[2]
-		]);
-		
-		echo json_encode([
-		  'error' => false,
-		  'user_id' => intval($user_id),
-		  'date' => $date
-		]);
-  }
-  catch(Exception $e) {
-    exit(json_encode([
-      'error' => true,
-      'message' => $e->getMessage()
-    ]));
-  }
+  delete_reservation();
 }, ['delete', 'post']);
