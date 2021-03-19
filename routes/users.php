@@ -83,4 +83,4 @@ Route::add('/api/user/password', function() {
       'message' => $e->getMessage()
     ]));
   }
-}, 'put');
+}, ['put', 'post']);

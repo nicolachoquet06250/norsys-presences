@@ -225,4 +225,4 @@ Route::add('/api/recap/save-template', function() {
 	echo json_encode([
 		'error' => false
 	]);
-}, 'put');
+}, ['put', 'post']);

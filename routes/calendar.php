@@ -146,4 +146,4 @@ Route::add('/api/reservation', function() {
       'message' => $e->getMessage()
     ]));
   }
-}, 'delete');
+}, ['delete', 'post']);
