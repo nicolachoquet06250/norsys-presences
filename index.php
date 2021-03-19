@@ -3,6 +3,7 @@
 //ini_set('display_errors', '1');
 
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Request-Method: GET, POST, DELETE, PUT, OPTIONS");
 
 require __DIR__.'/vendor/autoload.php';
 

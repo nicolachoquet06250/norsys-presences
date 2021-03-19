@@ -113,7 +113,7 @@ Route::add('/api/reservation', function () {
       'message' => $e->getMessage()
     ]));
   }
-}, ['post', 'options']);
+}, 'post');
 
 Route::add('/api/reservation', function() {
   $body = getBody();
@@ -146,4 +146,4 @@ Route::add('/api/reservation', function() {
       'message' => $e->getMessage()
     ]));
   }
-}, ['delete', 'options']);
+}, 'delete');
