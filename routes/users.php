@@ -47,13 +47,14 @@ Route::add('/api/user/register', function() {
 
 Route::add('/api/user/password', function() {
   $body = getBody();
-  $user_id = $body['user_id'];
-  $password = sha1($body['password']);
+  if (strtolower($_SERVER['REQUEST_METHOD']) === 'put' || (isset($body['method']) && strtolower($body['method']) === 'put')) {
+  	$user_id = $body['user_id'];
+  	$password = sha1($body['password']);
   
-  try {
-    $db = getDB();
+  	try {
+    	$db = getDB();
     
-    $request = $db->prepare('SELECT password FROM `users` WHERE id=:user_id', [
+    	$request = $db->prepare('SELECT password FROM `users` WHERE id=:user_id', [
 			PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY
 		]);
 		$request->execute([
@@ -66,7 +67,7 @@ Route::add('/api/user/password', function() {
 		  throw new Exception('Votre nouveau mot de passe ne doit pas être identique à l\'ancien');
 		}
 		
-    $request = $db->prepare('UPDATE `users` SET password=:password WHERE id=:user_id', [
+    	$request = $db->prepare('UPDATE `users` SET password=:password WHERE id=:user_id', [
 			PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY
 		]);
 		$request->execute([
@@ -76,11 +77,19 @@ Route::add('/api/user/password', function() {
 		echo json_encode([
 		  'error' => false  
 		]);
-  }
-  catch (Exception $e) {
-    exit(json_encode([
-      'error' => true,
-      'message' => $e->getMessage()
-    ]));
+  	} catch (Exception $e) {
+		exit(json_encode([
+		'error' => true,
+		'message' => $e->getMessage()
+		]));
+	}
+  } else {
+		http_response_code(400);
+
+		exit(json_encode([
+			'error' => true,
+			'code' => 401,
+			'message' => 'BAD REQUEST'
+		]));
   }
 }, ['put', 'post']);
