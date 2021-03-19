@@ -35,6 +35,7 @@ function delete_reservation() {
 }
 
 function add_reservation() {
+  $body = getBody();
   $user_id = $body['user_id'];
   $date = $body['date'];
   try {
@@ -151,6 +152,7 @@ Route::add('/api/reservation', function () {
   $body = getBody();
   if (isset($body['method']) && strtolower($body['method']) === 'delete') {
     delete_reservation();
+    exit();
   }
 
   add_reservation();
