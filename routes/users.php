@@ -9,12 +9,13 @@ Route::add('/api/user/register', function() {
 			'message' => 'Veuillez remplire les champs'
 		]));
 	}
-	$pseudo = strtolower(substr($body['firstname'], 0, 1).$body['lastname']);
+	$lastname = str_replace(' ', '', $body['lastname']);
+	$pseudo = strtolower(substr($body['firstname'], 0, 1).$lastname);
 	if (strstr($body['firstname'], '-')) {
-	  $pseudo = substr(explode('-', $body['firstname'])[0], 0, 1).substr(explode('-', $body['firstname'])[1], 0, 1).$body['lastname'];
+	  $pseudo = substr(explode('-', $body['firstname'])[0], 0, 1).substr(explode('-', $body['firstname'])[1], 0, 1).$lastname;
 	}
 	if (strstr($body['firstname'], ' ')) {
-	  $pseudo = substr(explode(' ', $body['firstname'])[0], 0, 1).substr(explode(' ', $body['firstname'])[1], 0, 1).$body['lastname'];
+	  $pseudo = substr(explode(' ', $body['firstname'])[0], 0, 1).substr(explode(' ', $body['firstname'])[1], 0, 1).$lastname;
 	}
 	$body['email'] = strtolower($pseudo).'@norsys.fr';
 	$body['password'] = sha1($body['password']);
